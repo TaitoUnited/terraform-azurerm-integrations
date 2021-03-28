@@ -1,9 +1,6 @@
 # Azure integrations
 
-Provides some custom jobs and notifications for your infrastructure:
-
-- TODO: long-term backups
-- TODO: slack notifications
+Provides SaaS-components related to integrations (events, data streaming, ETL, ...). TODO: implement.
 
 Example usage:
 
@@ -13,19 +10,18 @@ provider "azurerm" {
 }
 
 module "integrations" {
-  source              = "TaitoUnited/integrations/azurerm"
-  version             = "1.0.0"
+  source           = "TaitoUnited/integrations/azurerm"
+  version          = "1.0.0"
 
-  resource_group_name = "my-infrastructure"
-  name                = "my-infrastructure"
-  location            = "northeurope"
+  kafkas           = yamldecode(file("${path.root}/../infra.yaml"))["kafkas"]
 }
 ```
 
 Example YAML:
 
 ```
-TODO
+kafkas:
+  - name: my-kafka
 ```
 
 Combine with the following modules to get a complete infrastructure defined by YAML:
@@ -33,6 +29,7 @@ Combine with the following modules to get a complete infrastructure defined by Y
 - [Admin](https://registry.terraform.io/modules/TaitoUnited/admin/azurerm)
 - [DNS](https://registry.terraform.io/modules/TaitoUnited/dns/azurerm)
 - [Network](https://registry.terraform.io/modules/TaitoUnited/network/azurerm)
+- [Compute](https://registry.terraform.io/modules/TaitoUnited/compute/azurerm)
 - [Kubernetes](https://registry.terraform.io/modules/TaitoUnited/kubernetes/azurerm)
 - [Databases](https://registry.terraform.io/modules/TaitoUnited/databases/azurerm)
 - [Storage](https://registry.terraform.io/modules/TaitoUnited/storage/azurerm)
